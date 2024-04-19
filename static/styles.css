@@ -1,0 +1,203 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Add padding to the navbar */
+.navbar
+{
+    border-bottom: 1px solid #ccc;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* Adjust the logo image in the navbar */
+.navbar-brand img
+{
+    border-radius: 5px;
+    height: 2.5rem;
+    width: auto;
+}
+
+/* Adjust text color */
+h1, p
+{
+    color: #ccc;
+}
+
+/* Adjust form */
+.form-signin
+{
+    max-width: 330px;
+    padding: 1rem;
+}
+
+/* Adjust image size */
+.container .centered-image
+{
+    height: 8rem;
+    width: auto;
+}
+
+.form-signin .form-floating:focus-within
+{
+    z-index: 2;
+}
+
+.form-signin input[type="email"]
+{
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Adjust the middle element to be rounded for any forms */
+.form-floating .middle-element
+{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Adjust the bottom element to be rounded for any forms */
+.form-floating .bottom-element
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Adjust the input fields background color */
+.form-control
+{
+    background-color: #2b3035;
+}
+
+/* Adjust the input background color when clicked on */
+.form-control:focus
+{
+    background-color: #2b3035;
+}
+
+/* Custom styling for any areas with text */
+.text-area
+{
+    width: 60%;
+}
+
+/* Set the width and center the input box */
+.form-container {
+    width: 400px;
+    margin: 0 auto;
+}
+
+/* Center the checkboxes on the page */
+.form-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Set the top margin for radio buttons to 0 */
+.form-check-input {
+    margin-top: 0em;
+    }
+
+/* Class for displaying markdown resumes */
+.resume-display {
+    text-align: left;
+    white-space: pre-line;
+}
+
+/* Label spacing for any elements that require spacing */
+.label-spacing {
+    margin-right: 2rem;
+}
+
+/* Adjust images for the API key page */
+.api-key-image {
+    height: auto; 
+    width: 100%; 
+    object-fit: contain
+}
+
+/* Captions for figures */
+figcaption {
+    color: gray;
+    font-size: 0.8rem;
+    font-style: italic;
+    padding: 2px;
+    text-align: center;
+}
+
+/* Add a space between the label and button */
+label {
+    margin-left: .5rem;
+}
+
+/* Styling for the information icon */
+.info-icon {
+    margin-left: .4rem;
+    vertical-align: text-bottom;
+}
+
+/* Tooltip for information icons */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+}
+
+/* Text Box for the tooltip */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Make unordered lists without a bottom margin for the tooltip */
+.tooltip .tooltiptext ul{
+    margin-bottom: 0rem;
+    text-align: left;
+}
+/* Show the tooltip when the user hovers over the info icon */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.text-left{
+    text-align: left;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .container .centered-image
+    {
+        height: 6rem;
+        width: auto;
+    }
+
+    .form-container {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .text-area
+    {
+        width: 90%;
+    }
+}
