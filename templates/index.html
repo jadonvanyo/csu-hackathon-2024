@@ -6,65 +6,55 @@
 
 {% block main %}
     <div class="mb-5">
-        <h1>Tailored Resume</h1>
+        <h1>Tailored Questions</h1>
         <p>
-            Just copy and paste all the necessary information and get a resume tailored specifically for the job in seconds!
-            For best results, ensure your resume does not have any fancy formatting or layouts. You can save your resume for
-            easy access in the <a href="/account">Account</a> page.
+            Tailor your question to a particaualr student.
         </p>
     </div>
 
-    <form action="/" id="resumeForm" method="post">        
-        <div class="mb-3 form-container">
-            <label class="form-label" for="jobtitle">Target Job Title</label>
-            <input type="text" class="form-control" id="jobtitle" maxlength="50" name="jobtitle" placeholder="Target Job Title" required>
-        </div>
+    <form action="/" id="questionForm" method="post">
+        <div class="grid-container">
+            <div class="mb-3 top-div">
+                <div class="mb-3">
+                    <label for="questionarea" class="form-label">Enter your general question or prompt for a question</label>
+                    <textarea class="form-control" id="questionarea" placeholder="Example question" maxlength="4500" name="question" required rows="5"></textarea>
+                </div>
 
-        <div class="mb-3 form-container">
-            <label class="form-label" for="industry">Target Job Industry</label>
-            <input type="text" class="form-control" id="industry" maxlength="50" name="industry" placeholder="Target Job Industry" required>
-        </div>
+                <button class="btn btn-primary" id="submitbutton" type="submit">
+                    Generate Question
+                </button>
+            </div>
 
-        <div class="mb-3 form-container">
-            <label class="form-label" for="company">Target Company</label>
-            <input type="text" class="form-control" id="company" maxlength="50" name="company" placeholder="Target Company" required>
-        </div>
+            <div class="bottom-left-div">
+                <div class="dropdown-container">
+                    <select name="students" id="image-selector">
+                        <option value="../static/student1.png">Daquoine Lamar</option>
+                        <option value="../static/student2.png">William McCarteny</option>
+                        <option value="../static/student3.png">Mary Eskander</option>
+                    </select>
+                </div>
+                <div class="centered">
+                    <img id="selected-image" src="../static/student1.png" alt="Student Image" />
+                </div>
+            </div>
 
-        <div class="mb-3">
-            <label for="jobarea" class="form-label">Copy and paste the target job description below</label>
-            <textarea class="form-control" id="jobarea" placeholder="Target job description" maxlength="4500" name="jobdescription" required rows="10"></textarea>
-        </div>
+            <div class="bottom-right-div">
+                <h4>Personalized Output</h4>
 
-        <div class="mb-3">
-            <label for="resumearea" class="form-label">Copy and paste your existing resume below</label>
-            <textarea class="form-control" id="resumearea" placeholder="Existing resume" maxlength="4500" name="resume" required rows="10">{{ resume }}</textarea>
+                <div id="tailoredquestion"></div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <p>(This may take a few minutes)</p>
-            <button class="btn btn-primary" id="submitbutton" type="submit">
-                Submit Resume
-            </button>
-        </div>
-
     </form>
-
-    <div class="container py-4 mt-4" id="returnresume" hidden>
-        <h2>Important Responsibilities</h2>
-        <div class="mb-4 text-left" id="impresp">
-        </div>
-        <h2>Tailored Resume</h2>
-        <div class="mb-4 resume-display" id="tailoredresume">
-        </div>
-        <h2>Differences</h2>
-        <div id="differences">
-        </div>
-    </div>
 {% endblock %}
 
 {% block script %}
+document.getElementById('image-selector').addEventListener('change', function() {
+    var imagePath = this.value;
+    document.getElementById('selected-image').src = imagePath;
+});
+
 $(document).ready(function() {
-    $('#resumeForm').submit(function(event) {
+    $('#questionForm').submit(function(event) {
         event.preventDefault(); // Prevent the form from submitting via the browser
         var form = $(this);
         var url = form.attr('action');
@@ -79,13 +69,8 @@ $(document).ready(function() {
             success: function(response) {
 
                 if(response.status === 'success') {
-                    // Remove the hidden attribute from #returnresume
-                    $('#returnresume').removeAttr('hidden');
-
-                    // Update page with the important responsibilities, tailored resume, and differences
-                    $('#impresp').html(response.imp_resp);
-                    $('#tailoredresume').html(response.tailored_resume);
-                    $('#differences').html(response.differences);
+                    // Update page with tailored questions
+                    $('#tailoredquestion').html(response.tailoredquestion);
                 }
 
                 else if(response.status === 'error') {
@@ -99,7 +84,7 @@ $(document).ready(function() {
             },
             complete: function() {
                 // Hide loading indicator
-                $('#submitbutton').html('Submit Resume').prop('disabled', false);
+                $('#submitbutton').html('Generate Question').prop('disabled', false);
             }
         });
     });

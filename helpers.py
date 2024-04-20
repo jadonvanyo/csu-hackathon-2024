@@ -70,7 +70,7 @@ def get_fernet_instance():
     """Initialize and return a Fernet instance using a secret key"""
     # TODO: Create your own secret key and update the file path to the file with the secret key
     # Open the file containing the secret key
-    with open('/Users/jadonvanyo/Desktop/cs50/final_project/secret_keys/secret_key.txt', 'r', encoding='utf-8') as file:
+    with open('/Users/jadonvanyo/Desktop/cs50x/final_project/secret_keys/secret_key.txt', 'r', encoding='utf-8') as file:
         # Generate fernet instance to encrypt the user's secret key from secret key in file
         fernet_instance = Fernet(file.read().strip())
 
@@ -139,7 +139,7 @@ def get_differences(api_key, original_resume, tailored_resume, temp=1):
     return completion.choices[0].message.content
 
 
-def get_tailored_question_full(api_key, company, jobdescription, jobtitle, prevjob, resume, temp=1):
+def get_personalized_tutor_full(api_key, company, jobdescription, jobtitle, prevjob, resume, temp=1):
     """Generate a full tailored cover letter from OpenAI"""
     # Save the user's OpenAI API Key for use in this function
     openai.api_key = f"{api_key}"
@@ -164,7 +164,7 @@ def get_tailored_question_full(api_key, company, jobdescription, jobtitle, prevj
     return completion.choices[0].message.content
 
 
-def get_tailored_question_partial(api_key, company, jobdescription, jobtitle, prevjob, resume, temp=1):
+def get_personalized_tutor_partial(api_key, company, jobdescription, jobtitle, prevjob, resume, temp=1):
     """Generate a partial tailored cover letter from OpenAI"""
     # Save the user's OpenAI API Key for use in this function
     openai.api_key = f"{api_key}"

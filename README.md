@@ -154,7 +154,7 @@ This is the main feature of this web application. This page gives the user all t
 This feature allows the user to view the last 5 documents that they have generated. The documents are pulled from the history table in the resi.db database and displayed in a collapsible accordion for easy viewing. The oldest document in the history is replaced whenever the user generates a new document in the index function. The old documents are displayed from newest to oldest and include the target job title, target company, document type, and when it was generated.
 
 ### app.py:
-This file contains all the necessary routes for the web application: index, about, account, api_key, history, login, logout, register, and tailored_question.
+This file contains all the necessary routes for the web application: index, about, account, api_key, history, login, logout, register, and personalized_tutor.
 
 #### Index:
 This route handles the main feature of this web application: Tailoring the user's resume to a job description. 
@@ -217,7 +217,7 @@ When accessing this route using "GET" the page will render a template with the r
 #### Tailor Cover Letter
 This route allows the user to create a partial or complete cover letter tailored to a job description.
 
-When accessed using "POST", the route will check that the user has entered a previous/current job title, target company, target job title, job description and resume that fall within certain length requirements. Next, it will lookup the user's OpenAI API Key in the database and determine whether the user wanted to generate a full or partial cover letter. If the user wanted a full cover letter, it will call the `get_tailored_question_full` function, and else, it will call the `get_tailored_question_partial`. 
+When accessed using "POST", the route will check that the user has entered a previous/current job title, target company, target job title, job description and resume that fall within certain length requirements. Next, it will lookup the user's OpenAI API Key in the database and determine whether the user wanted to generate a full or partial cover letter. If the user wanted a full cover letter, it will call the `get_personalized_tutor_full` function, and else, it will call the `get_personalized_tutor_partial`. 
 
 A cover letter name is then generated using the target company and target job title. This name, along with the target job title, target company, tailored cover letter, and date and time that the cover letter was generated, are stored in the history database for the user. If there are already 5 documents stored for that particular user, the oldest document is overwritten with the resume that has just been generated.
 
@@ -261,12 +261,12 @@ This function will use OpenAI's API to generate a table of the differences betwe
 
 The function will take the an OpenAI `api_key`, `original_resume`, `tailored_resume`, and `temp` that is automatically set to 1 for a more creative response. Using this information, the function will enter the required information into the prompts that will be sent to OpenAI's model and will return the model's response in markdown for the differences between the original and tailored resume. This function uses the gpt-4-1106-preview model for increased accuracy and reliability in responses. The top_p is set to 0.9 to cut down some of the responses that the model considers to improve speed marginally.
 
-#### get_tailored_question_full
+#### get_personalized_tutor_full
 This function will use OpenAI's API to generate a complete tailored cover letter from the user's input.
 
 The function will take the an OpenAI `api_key`, `company`, `jobdescription`, `jobtitle`, `prevjob`, `resume`, and `temp` that is automatically set to 1 for a more creative response. Using this information, the function will enter the required information into the prompts that will be sent to OpenAI's model and will return the model's response in markdown for a cover letter tailored to a specific job description. The entered information is used to improve the prompt for the model to improve the response for the user. This function uses the gpt-4-1106-preview model for increased accuracy and reliability in responses. The top_p is set to 0.75 to cut down some of the responses that the model considers to improve speed marginally.
 
-#### get_tailored_question_partial
+#### get_personalized_tutor_partial
 This function will use OpenAI's API to generate a few key sentences to help the user create a tailored cover letter to the job description.
 
 The function will take the an OpenAI `api_key`, `company`, `jobdescription`, `jobtitle`, `prevjob`, `resume`, and `temp` that is automatically set to 1 for a more creative response. Using this information, the function will enter the required information into the prompts that will be sent to OpenAI's model and will return the model's response in markdown for a few key sentences for a cover letter tailored to a specific job description. The entered information is used to improve the prompt for the model to improve the response for the user. This function uses the gpt-4-1106-preview model for increased accuracy and reliability in responses. The top_p is set to 0.75 to cut down some of the responses that the model considers to improve speed marginally.
